@@ -6,3 +6,11 @@ pip install pybluez
 
 pip install pybluez\[ble\]
 
+
+>> Swapfile fix
+sudo nano /etc/dphys-swapfile
+
+sudo /etc/init.d/dphys-swapfile stop
+sudo /etc/init.d/dphys-swapfile start
+
+sudo free -m
