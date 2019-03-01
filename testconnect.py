@@ -6,7 +6,7 @@ req = GATTRequester("B8:27:EB:F1:GC:F3", False)
 
 import time
 
-check = 0
+check = 1
 while(check == 1):
 	try:
         steps = req.read_by_handle(0x10)[0]
