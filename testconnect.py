@@ -8,7 +8,7 @@ import time
 
 check = 1
 while(check == 1):
-	try:
+    try:
         steps = req.read_by_handle(0x10)[0]
         print(steps)
         check = 1
