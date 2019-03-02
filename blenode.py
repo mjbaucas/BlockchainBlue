@@ -10,7 +10,7 @@ while(True):
         client_socket.send("Hello World")
         print "Finished"
         client_socket.close()
-        time.sleep(5)
+        time.sleep(2)
     except Exception as e:
         print e
     
