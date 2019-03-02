@@ -7,4 +7,4 @@ while(True):
     client_socket.send("Hello World")
     print "Finished"
     client_socket.close()
-
+    time.sleep(5)

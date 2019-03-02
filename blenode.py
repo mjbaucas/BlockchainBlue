@@ -1,9 +1,20 @@
 from bluetooth import *
 import time
 
-
+route = "B8:27:EB:F1:6C:F3"
 
 while(True):
+    try:
+        client_socket=BluetoothSocket( RFCOMM )
+        client_socket.connect((route, 3))
+        client_socket.send("Hello World")
+        print "Finished"
+        client_socket.close()
+        time.sleep(5)
+    except Exception as e:
+        print e
+    
+    
     server_socket=BluetoothSocket( RFCOMM )
     server_socket.bind(("", 2 ))
     server_socket.listen(1)
