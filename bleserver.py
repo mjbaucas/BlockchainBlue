@@ -12,6 +12,5 @@ while(True):
 
     print "received [%s]" % data
     client_socket.close()
-    time.sleep(3)
 
 server_socket.close()
