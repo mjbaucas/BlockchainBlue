@@ -6,7 +6,7 @@ route = "B8:27:EB:B4:34:F1"
 while(True):
     sent = False
     trial = 0
-    while(not sent or trial <= 10):
+    while(not sent and trial <= 5):
         try:
             client_socket=BluetoothSocket( RFCOMM )
             client_socket.connect((route, 3))
@@ -22,7 +22,7 @@ while(True):
     
     server_socket=BluetoothSocket( RFCOMM )
     server_socket.bind(("", 3 ))
-    server_socket.listen(1)
+    server_socket.listen(5)
     client_socket, address = server_socket.accept()
     data = client_socket.recv(1024)
     print "received [%s]" % data
