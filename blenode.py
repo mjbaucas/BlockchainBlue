@@ -1,20 +1,22 @@
 from bluetooth import *
 import time
 
-route = "B8:27:EB:F1:6C:F3"
+route = "B8:27:EB:B4:34:F1"
 
 while(True):
     sent = False
-    while(not sent)
+    trial = 0
+    while(not sent or trial <= 10):
         try:
             client_socket=BluetoothSocket( RFCOMM )
             client_socket.connect((route, 3))
             client_socket.send("Hello World")
             print "Finished"
             client_socket.close()
-            time.sleep(2)
             sent = True
         except Exception as e:
+            trial+=1
+            time.sleep(2)
             print e
     
     
