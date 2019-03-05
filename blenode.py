@@ -1,7 +1,7 @@
 from bluetooth import *
 import time
 
-route = "B8:27:EB:B4:34:F1"
+route = "B8:27:EB:F1:6C:F3"
 
 while(True):
     sent = False
@@ -16,7 +16,7 @@ while(True):
             sent = True
         except Exception as e:
             trial+=1
-            time.sleep(2)
+            time.sleep(3)
             print e
     
     
@@ -28,3 +28,4 @@ while(True):
     print "received [%s]" % data
     client_socket.close()
     server_socket.close()
+    time.sleep(3)
