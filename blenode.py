@@ -15,10 +15,11 @@ while(True):
     trial = 0
     while(not sent and trial <= 5):
         try:
+            route = node.pull_from_ledger()
             client_socket=BluetoothSocket( RFCOMM )
-            client_socket.connect((node.pull_from_ledger(), 3))
-            client_socket.send("Hello World")
-            print "Finished"
+            client_socket.connect((route, 3))
+            client_socket.send("Hello from {}".format(node.bdaddr))
+            print "Message sent to {}".format(route)
             client_socket.close()
             sent = True
         except Exception as e:
