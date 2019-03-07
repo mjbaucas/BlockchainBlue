@@ -1,15 +1,22 @@
 from bluetooth import *
+from node import Node
 import time
 
-route = "B8:27:EB:F1:6C:F3"
+ledger = [
+	"B8:27:EB:F1:6C:F3",
+	"B8:27:EB:B4:34:F1"
+]
 
+node = Node(ledger)
+
+counter = 0
 while(True):
     sent = False
     trial = 0
     while(not sent and trial <= 5):
         try:
             client_socket=BluetoothSocket( RFCOMM )
-            client_socket.connect((route, 3))
+            client_socket.connect((node.pull_from_ledger(), 3))
             client_socket.send("Hello World")
             print "Finished"
             client_socket.close()
@@ -18,6 +25,7 @@ while(True):
             trial+=1
             time.sleep(3)
             print e
+        counter+=1
     
     
     server_socket=BluetoothSocket( RFCOMM )
