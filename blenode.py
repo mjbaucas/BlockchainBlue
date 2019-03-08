@@ -5,7 +5,7 @@ import time
 ledger = [
 	"B8:27:EB:F1:6C:F3",
 	"B8:27:EB:B4:34:F1",
-    "B8:27:EB:BA:01:F7".
+    "B8:27:EB:BA:01:F7",
     "B8:27:EB:87:B1:40"
 ]
 
