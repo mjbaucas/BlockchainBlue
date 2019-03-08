@@ -4,14 +4,19 @@ import commands
 class Node:
 	def __init__(self, ledger):
 		self.bdaddr = self.get_local_bdaddr()
-		self.ledge_count = 0
 		
 		try:
+			index = ledger.index(self.bdaddr)
 			ledger.remove(self.bdaddr)
+			limit = len(ledger)
+			self.ledger_count = index 
+			if self.ledger_count >= limit:
+				self.ledger_count = self.ledger_count%limit
 		except ValueError:
-			pass
+			self.ledger_count = 0
 		
 		self.ledger = ledger
+		
 		
 	def get_local_bdaddr(self):
 		_ , output = commands.getstatusoutput("hciconfig")
@@ -19,8 +24,9 @@ class Node:
 	
 	def pull_from_ledger(self):
 		limit = len(self.ledger)
-		self.ledge_count+=1
-		if self.ledge_count >= limit:
-			self.ledge_count = self.ledge_count%limit
-		return self.ledger[self.ledge_count]
+		value = self.ledger[self.ledger_count]
+		self.ledger_count+=1
+		if self.ledger_count >= limit:
+			self.ledger_count = self.ledger_count%limit
+		return value
 
