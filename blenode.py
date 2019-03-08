@@ -26,7 +26,7 @@ while(True):
             sent = True
         except Exception as e:
             trial+=1
-            time.sleep(3)
+            time.sleep(2)
             print e
         counter+=1
     
@@ -39,4 +39,4 @@ while(True):
     print "received [%s]" % data
     client_socket.close()
     server_socket.close()
-    time.sleep(3)
+    time.sleep(1)
