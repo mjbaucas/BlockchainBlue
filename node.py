@@ -1,5 +1,6 @@
 import commands
-
+from aes_cipher import AESCipher
+from time import time
 
 class Node:
 	def __init__(self, ledger):
@@ -16,6 +17,8 @@ class Node:
 			self.ledger_count = 0
 		
 		self.ledger = ledger
+		self.cipher = AESCipher()
+		self.key = "KEY"
 		
 		
 	def get_local_bdaddr(self):
@@ -30,3 +33,17 @@ class Node:
 			self.ledger_count = self.ledger_count%limit
 		return value
 
+	def get_ledger(self):
+		return self.cipher.encrypt(self.ledger, self.key)
+
+	def get_consensus_packet(self):
+		message = {
+			"Source": self.bdaddr,
+			"Chain": self.get_ledger(),
+			"Timestamp": int(time())
+		}
+		return self.cipher.encrypt(self.ledger, self.key)
+	
+	def read_packet(self, packet):
+		message = self.cipher.decrypt(packet, self.key)
+		print(message)

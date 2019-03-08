@@ -20,7 +20,7 @@ while(True):
             route = node.pull_from_ledger()
             client_socket=BluetoothSocket( RFCOMM )
             client_socket.connect((route, 3))
-            client_socket.send("Hello from {}".format(node.bdaddr))
+            client_socket.send(node.get_consensus_packet())
             print "Message sent to {}".format(route)
             client_socket.close()
             sent = True
@@ -37,5 +37,6 @@ while(True):
     client_socket, address = server_socket.accept()
     data = client_socket.recv(1024)
     print "received [%s]" % data
+    node.read_packet(data)
     client_socket.close()
     server_socket.close()
