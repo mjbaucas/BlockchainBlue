@@ -42,8 +42,8 @@ class Node:
 			"Chain": self.get_ledger(),
 			"Timestamp": int(time())
 		}
-		return self.cipher.encrypt(self.ledger, self.key)
+		return self.cipher.encrypt(message, self.key)
 	
 	def read_packet(self, packet):
 		message = self.cipher.decrypt(packet, self.key)
-		print(message)
+		print message

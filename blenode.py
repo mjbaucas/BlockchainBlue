@@ -11,10 +11,10 @@ ledger = [
 
 node = Node(ledger)
 
-counter = 0
 while(True):
     sent = False
     trial = 0
+    
     while(not sent and trial <= 5):
         try:
             route = node.pull_from_ledger()
@@ -28,7 +28,6 @@ while(True):
             trial+=1
             time.sleep(2)
             print e
-        counter+=1
     
     
     server_socket=BluetoothSocket( RFCOMM )
