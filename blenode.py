@@ -35,7 +35,6 @@ while(True):
     server_socket.listen(8)
     client_socket, address = server_socket.accept()
     data = client_socket.recv(1024)
-    print "received [%s]" % data
-    node.read_packet(data)
+    print "received [%s]" % node.read_packet(data)
     client_socket.close()
     server_socket.close()

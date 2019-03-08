@@ -45,5 +45,5 @@ class Node:
 		return self.cipher.encrypt(message, self.key)
 	
 	def read_packet(self, packet):
-		message = self.cipher.decrypt(packet, self.key)
-		print message
+		return self.cipher.decrypt(packet, self.key)
+		
