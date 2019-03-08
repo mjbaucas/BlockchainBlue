@@ -12,7 +12,7 @@ class Node:
 			pass
 		
 		self.ledger = ledger
-
+		
 	def get_local_bdaddr(self):
 		_ , output = commands.getstatusoutput("hciconfig")
 		return output.split("hci0:")[1].split("BD Address: ")[1].split(" ")[0] 
