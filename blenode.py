@@ -15,7 +15,7 @@ while(True):
     sent = False
     trial = 0
     
-    while(not sent and trial <= 5):
+    while(not sent and trial <= 3):
         try:
             route = node.pull_from_ledger()
             client_socket=BluetoothSocket( RFCOMM )
@@ -26,7 +26,7 @@ while(True):
             sent = True
         except Exception as e:
             trial+=1
-            time.sleep(2)
+            time.sleep(1)
             print e
     
     
