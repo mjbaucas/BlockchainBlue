@@ -51,6 +51,7 @@ class Node:
 	
 	# Verify ledger
 	def verify_ledger(self, hashed_ledger):
+		hashed_ledger = self.get_ledger()
 		return hashed_ledger == hashlib.sha256(str(self.base_ledger)).hexdigest()
 
 	# Create consensus packet
