@@ -10,6 +10,7 @@ class Node:
 	# Initialization
 	def __init__(self, ledger):
 		self.bdaddr = self.get_local_bdaddr()
+		self.base_ledger = ledger
 		
 		# Set ledger count to position of local address in current ledger
 		try:
@@ -44,13 +45,13 @@ class Node:
     # Get encrypted version of ledger
 	def get_ledger(self):
 		sha = hashlib.sha256()
-		sha.update(str(self.ledger))
+		sha.update(str(self.base_ledger))
 		return sha.hexdigest()
 		#sha.update((str(self.index) + str(self.timestamp) + str(self.transactions) + str(self.previous_hash)).encode('utf-8'))
 	
 	# Verify ledger
 	def verify_ledger(self, hashed_ledger):
-		return hashed_ledger == hashlib.sha256(str(self.ledger)).hexdigest()
+		return hashed_ledger == hashlib.sha256(str(self.base_ledger)).hexdigest()
 
 	# Create consensus packet
 	def get_consensus_packet(self):
