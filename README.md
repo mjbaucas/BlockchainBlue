@@ -1,2 +1,2 @@
 # BlockchainBlue
-BLE Blockchain as IoT Gateway Simulator 
+A BLE-based IoT gateway simulator that is decentralised with the used of a basic blockchain implementation. This design takes a chain of devices that communicate with eachother through BLE. Each device contains a server-cleint model for Bluetooth application to communicate. A copy of a predefined blockchain is stored within each device that will be used to simulate consensus protocols that can simulate a decentralised IoT gateway.    
