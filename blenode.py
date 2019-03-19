@@ -11,7 +11,7 @@ ledger = [
 ]
 
 node = Node(ledger)
-
+record = open("message_records.txt", "w+")
 while(True):
     # Reset variables
     sent = False
@@ -25,11 +25,13 @@ while(True):
             client_socket.connect((route, 3))
             client_socket.send(node.get_consensus_packet())
             print "Message sent to {}".format(route)
+            record.write("{} {} {} 1 \n".format(node.bdaddr, route, int(time.time())))
             client_socket.close()
             sent = True
         except Exception as e:
             trial+=1
             time.sleep(1)
+            record.write("{} {} {} 0 \n".format(node.bdaddr, route, int(time.time())))
             print e
     
     # Wait for packet from other device
