@@ -1,16 +1,5 @@
 
 >> Dependencies
-sudo apt-get install libbluetooth-dev bluez bluez-hcidump  libboost-python-dev libboost-thread-dev libglib2.0-dev
+sudo apt-get install libbluetooth-dev python-dev
 
-pip install pybluez
-
-pip install pybluez\[ble\]
-
-
->> Swapfile fix
-sudo nano /etc/dphys-swapfile
-
-sudo /etc/init.d/dphys-swapfile stop
-sudo /etc/init.d/dphys-swapfile start
-
-sudo free -m
+sudo pip install pybluez
