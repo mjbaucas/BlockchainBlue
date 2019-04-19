@@ -4,15 +4,27 @@ import hashlib
 from time import time
 
 from aes_cipher import AESCipher
+from blockchain import Chain
 
+# Temporary Ledger
+init_ledger = [
+	"B8:27:EB:9F:A5:AC",
+	"B8:27:EB:8C:3E:7C",
+    "B8:27:EB:F1:6C:F3",
+    "B8:27:EB:13:01:59",
+    "B8:27:EB:A1:35:B7",
+    "B8:27:EB:F5:81:A1"
+]
 
 class Node:
 	# Initialization
-	def __init__(self, ledger):
-		self.bdaddr = self.get_local_bdaddr()
-		self.base_ledger = ledger
+	def __init__(self):
+		#self.bdaddr = self.get_local_bdaddr()
+		self.base_ledger = Chain()
+		self.base_ledger.gen_next_block(hashlib.sha256("NodeAddressBlock1".encode()).digest(), init_ledger)
 		
 		# Set ledger count to position of local address in current ledger
+		ledger = self.base_ledger
 		try:
 			index = ledger.index(self.bdaddr)
 			ledger.remove(self.bdaddr)
