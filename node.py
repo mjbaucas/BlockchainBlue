@@ -7,7 +7,7 @@ from aes_cipher import AESCipher
 from blockchain import Chain
 
 # Temporary BLE Ledger
-init_ledger = [
+init_ble_ledger = [
 	"B8:27:EB:CA:80:6C",
 	"B8:27:EB:13:01:59",
 	"B8:27:EB:1B:F2:FC",
@@ -15,10 +15,11 @@ init_ledger = [
 ]
 
 # Temporary WiFi Ledger
-init_ledger = [
+init_ip_ledger = [
 	"10.11.151.141",
 	"10.11.153.35",
 	"10.11.223.65",
+	"10.11.193.178"
 ]
 
 class Node:
@@ -28,7 +29,8 @@ class Node:
 		self.bdaddr = self.get_local_ipaddr()
 		
 		self.base_ledger = Chain()
-		self.base_ledger.gen_next_block(hashlib.sha256("NodeAddressBlock1".encode()).digest(), init_ledger)
+		#self.base_ledger.gen_next_block(hashlib.sha256("NodeAddressBlock1".encode()).digest(), init_ble_ledger)
+		self.base_ledger.gen_next_block(hashlib.sha256("NodeAddressBlock1".encode()).digest(), init_ip_ledger)
 		
 		# Set ledger count to position of local address in current ledger
 		ledger = self.base_ledger.output_ledger()
