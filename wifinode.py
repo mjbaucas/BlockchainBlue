@@ -13,32 +13,27 @@ while(True):
     # Attempt to send packet to other device
     while(not sent and trial <= 3):
         try:
-            route = node.pull_from_ledger()
-            client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client.connect((route, 32500))
-            client.send(node.get_consensus_packet())
-            print "Message sent to {}".format(route)
-            record.write("{} {} {} 1 \n".format(node.bdaddr, route, int(time.time())))
-            client.shutdown(socket.SHUT_RDWR)
-            client.close()
-            sent = True
+			route = node.pull_from_ledger()
+			server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			server.bind((route, 32500))
+			server.listen(1)
+			connection, address = server.accept()
+			packet = connection.recv(1024)
+			data = node.read_packet(packet)
+			print "received [{}]".format(data)
+			print "{}".format(node.verify_ledger(data['Chain']))
+			connection.send(node.get_consensus_packet())
+			print "Message sent to {}".format(route)
+			record.write("{} {} {} 1 \n".format(node.bdaddr, route, int(time.time())))
+			sent = True
         except Exception as e:
 			trial+=1
 			time.sleep(1)
 			record.write("{} {} {} 0 \n".format(node.bdaddr, route, int(time.time())))
 			print e
     
-    # Wait for packet from other device
-	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	server.bind(("", 32500))
-	server.listen(5)
-    connection, address = server.accept()
-    packet = connection.recv(1024)
-    data = node.read_packet(packet)
-    print "received [{}]".format(data)
-    print "{}".format(node.verify_ledger(data['Chain']))
-    
     # Close sockets
-    client.close()
+    connection.shutdown(socket.SHUT_RDWR)
+    connection.close()
     server.shutdown(socket.SHUT_RDWR)
     server.close()
