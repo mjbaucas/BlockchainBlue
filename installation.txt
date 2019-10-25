@@ -1,5 +1,0 @@
-
->> Dependencies
-sudo apt-get install libbluetooth-dev python-dev
-
-sudo pip install pybluez

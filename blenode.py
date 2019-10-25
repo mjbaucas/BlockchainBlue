@@ -2,12 +2,7 @@ from bluetooth import *
 from node import Node
 import time
 
-# Temporary Ledger
-ledger = [
-"B8:27:EB:F5:81:A1"
-]
-
-node = Node(ledger)
+node = Node()
 record = open("message_records.txt", "w+")
 while(True):
     # Reset variables
