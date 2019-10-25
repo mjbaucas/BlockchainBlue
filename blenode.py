@@ -4,12 +4,7 @@ import time
 
 # Temporary Ledger
 ledger = [
-	"B8:27:EB:9F:A5:AC",
-	"B8:27:EB:8C:3E:7C",
-    "B8:27:EB:F1:6C:F3",
-    "B8:27:EB:13:01:59",
-    "B8:27:EB:A1:35:B7",
-    "B8:27:EB:F5:81:A1"
+"B8:27:EB:F5:81:A1"
 ]
 
 node = Node(ledger)
