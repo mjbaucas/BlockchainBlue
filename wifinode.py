@@ -38,5 +38,5 @@ while(True):
     print "{}".format(node.verify_ledger(data['Chain']))
     
     # Close sockets
-    client_socket.close()
-    server_socket.close()
+    client.close()
+    server.close()
