@@ -22,10 +22,11 @@ while(True):
             client.close()
             sent = True
         except Exception as e:
-            trial+=1
-            time.sleep(1)
-            record.write("{} {} {} 0 \n".format(node.bdaddr, route, int(time.time())))
-            print e
+			client.close()
+			trial+=1
+			time.sleep(1)
+			record.write("{} {} {} 0 \n".format(node.bdaddr, route, int(time.time())))
+			print e
     
     # Wait for packet from other device
 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
