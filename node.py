@@ -17,12 +17,12 @@ init_ledger = [
 class Node:
 	# Initialization
 	def __init__(self):
-		#self.bdaddr = self.get_local_bdaddr()
+		self.bdaddr = self.get_local_bdaddr()
 		self.base_ledger = Chain()
 		self.base_ledger.gen_next_block(hashlib.sha256("NodeAddressBlock1".encode()).digest(), init_ledger)
 		
 		# Set ledger count to position of local address in current ledger
-		ledger = self.base_ledger
+		ledger = self.base_ledger.output_ledger()
 		try:
 			index = ledger.index(self.bdaddr)
 			ledger.remove(self.bdaddr)
