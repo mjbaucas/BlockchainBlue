@@ -30,20 +30,22 @@ while(True):
 			print e
     
     # Wait for packet from other device
-	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	while(not bound):
-		try: 
-			server.bind(("", 32500))
-			server.listen(5)
-			connection, address = server.accept()
-			packet = connection.recv(1024)
-			data = node.read_packet(packet)
-			print "received [{}]".format(data)
-			print "{}".format(node.verify_ledger(data['Chain']))
-			bound = True		
-		except Exception as e:
-			time.sleep(1)
-			
+    while(not bound):
+        try: 
+            server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            server.bind(("", 32500))
+            server.listen(5)
+            connection, address = server.accept()
+            packet = connection.recv(1024)
+            data = node.read_packet(packet)
+            print "received [{}]".format(data)
+            print "{}".format(node.verify_ledger(data['Chain']))
+            server.shutdown(socket.SHUT_RDWR)
+            server.close()
+            bound = True		
+        except Exception as e:
+            time.sleep(1)
+
     # Close sockets
     connection.shutdown(socket.SHUT_RDWR)
     connection.close()
