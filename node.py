@@ -9,7 +9,9 @@ from blockchain import Chain
 # Temporary Ledger
 init_ledger = [
 	"B8:27:EB:F5:81:A1",
-	"B8:27:EB:13:01:59"
+	"B8:27:EB:13:01:59",
+	"B8:27:EB:1B:F2:FC",
+	
 ]
 
 class Node:
