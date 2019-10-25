@@ -17,7 +17,8 @@ init_ledger = [
 # Temporary WiFi Ledger
 init_ledger = [
 	"10.11.151.141",
-	"10.11.153.35"
+	"10.11.153.35",
+	"10.11.223.65",
 ]
 
 class Node:
