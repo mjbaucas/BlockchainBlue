@@ -6,7 +6,7 @@ from time import time
 from aes_cipher import AESCipher
 from blockchain import Chain
 
-# Temporary Ledger
+# Temporary BLE Ledger
 init_ledger = [
 	"B8:27:EB:CA:80:6C",
 	"B8:27:EB:13:01:59",
@@ -14,10 +14,17 @@ init_ledger = [
 	"B8:27:EB:8C:3E:7C"
 ]
 
+# Temporary WiFi Ledger
+init_ledger = [
+	"10.11.151.141"
+]
+
 class Node:
 	# Initialization
 	def __init__(self):
-		self.bdaddr = self.get_local_bdaddr()
+		#self.bdaddr = self.get_local_bdaddr()
+		self.bdaddr = self.get_local_ipaddr()
+		
 		self.base_ledger = Chain()
 		self.base_ledger.gen_next_block(hashlib.sha256("NodeAddressBlock1".encode()).digest(), init_ledger)
 		
@@ -42,6 +49,10 @@ class Node:
 	def get_local_bdaddr(self):
 		_ , output = commands.getstatusoutput("hciconfig")
 		return output.split("hci0:")[1].split("BD Address: ")[1].split(" ")[0] 
+	
+	# Get IP address from device
+	def get_local_ipaddr(self):
+		return commands.getoutput('hostname -I')
 	
 	# Pull an address from the ledger
 	def pull_from_ledger(self):
