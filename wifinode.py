@@ -19,9 +19,11 @@ while(True):
             client.send(node.get_consensus_packet())
             print "Message sent to {}".format(route)
             record.write("{} {} {} 1 \n".format(node.bdaddr, route, int(time.time())))
+            client.shutdown()
             client.close()
             sent = True
         except Exception as e:
+			client.shutdown()
 			client.close()
 			trial+=1
 			time.sleep(1)
