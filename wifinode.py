@@ -23,8 +23,6 @@ while(True):
             client.close()
             sent = True
         except Exception as e:
-			client.shutdown(socket.SHUT_RDWR)
-			client.close()
 			trial+=1
 			time.sleep(1)
 			record.write("{} {} {} 0 \n".format(node.bdaddr, route, int(time.time())))
@@ -41,7 +39,6 @@ while(True):
     print "{}".format(node.verify_ledger(data['Chain']))
     
     # Close sockets
-    client.shutdown(socket.SHUT_RDWR)
     client.close()
     server.shutdown(socket.SHUT_RDWR)
     server.close()
