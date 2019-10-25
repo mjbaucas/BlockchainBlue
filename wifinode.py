@@ -15,7 +15,7 @@ while(True):
         try:
             route = node.pull_from_ledger()
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client.connect((route, 3))
+            client.connect((route, 32500))
             client.send(node.get_consensus_packet())
             print "Message sent to {}".format(route)
             record.write("{} {} {} 1 \n".format(node.bdaddr, route, int(time.time())))
