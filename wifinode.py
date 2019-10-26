@@ -9,10 +9,12 @@ while(True):
     # Reset variables
     sent = False
     bound = False
-    trial = 0
+    send_trial = 0
+    bound_trial = 0
+    
     
     # Attempt to send packet to other device
-    while(not sent and trial <= 3):
+    while(not sent and send_trial <= 3):
         try:
             route = node.pull_from_ledger()
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,13 +26,13 @@ while(True):
             client.close()
             sent = True
         except Exception as e:
-			trial+=1
+			send_trial+=1
 			time.sleep(1)
 			record.write("{} {} {} 0 \n".format(node.bdaddr, route, int(time.time())))
 			print e
     
     # Wait for packet from other device
-    while(not bound):
+    while(not bound and bound_trial <= 3):
         try: 
             server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             server.bind(("", 32500))
@@ -44,8 +46,11 @@ while(True):
             server.close()
             bound = True		
         except Exception as e:
-            time.sleep(2)
-
+            bound_trial+=1
+            time.sleep(1)
+            record.write("{} {} {} 0 \n".format(node.bdaddr, address, int(time.time())))
+            print e
+            
     # Close sockets
     connection.close()
     client.close()
