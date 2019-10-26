@@ -47,8 +47,6 @@ while(True):
             time.sleep(2)
 
     # Close sockets
-    connection.shutdown(socket.SHUT_RDWR)
     connection.close()
     client.close()
-    server.shutdown(socket.SHUT_RDWR)
     server.close()
