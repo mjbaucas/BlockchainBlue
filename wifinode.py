@@ -44,7 +44,7 @@ while(True):
             server.close()
             bound = True		
         except Exception as e:
-            time.sleep(1)
+            time.sleep(2)
 
     # Close sockets
     connection.shutdown(socket.SHUT_RDWR)
